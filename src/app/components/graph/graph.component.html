@@ -1,0 +1,36 @@
+<div class="card">
+  <div class="card-header">
+    Graph
+  </div>
+  <div class="card-body">
+    <div class="vh-75 d-flex">
+      <div class="col-10 p-0" [id]="'sigma-container-' + index"></div>
+      <div class="col border-left bg-light">
+
+        <h6 class="mt-3">Display datasets</h6>
+        <div class="mx-3">
+          <form [formGroup]="datasetsForm">
+            <div class="form-check mt-2">
+              <input class="form-check-input" type="checkbox" value="" id="{{'allDatasets' + index}}"
+                     formControlName="{{'allDatasets' + index}}">
+              <label class="form-check-label ml-2" for="{{'allDatasets' + index}}">
+                Combine all
+              </label>
+            </div>
+
+            <div class="form-check mt-2" *ngFor="let dataset of graphsCollection">
+              <input class="form-check-input" type="checkbox" value="" id="{{dataset.TITLE + index}}"
+                     formControlName="{{dataset.TITLE + index}}">
+              <label class="form-check-label ml-2" for="{{dataset.TITLE + index}}">
+                {{dataset.TITLE}}
+              </label>
+            </div>
+
+          </form>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>

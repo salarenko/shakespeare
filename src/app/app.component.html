@@ -1,0 +1,24 @@
+<div class="background-image"></div>
+<router-outlet></router-outlet>
+
+<div *ngIf="loaderService.displayLoader" class="loader-container">
+  <div class="center-loader">
+    <div class="container">
+      <div class="dot-container">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <div class="dot-container">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <div class="dot-container">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+    </div>
+  </div>
+</div>

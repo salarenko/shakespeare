@@ -1,0 +1,26 @@
+<div class="p-4">
+
+  <ngb-tabset [destroyOnHide]="false">
+    <ngb-tab [title]="dataset.datasetTitle" *ngFor="let dataset of datasetsCollection; let i = index">
+      <ng-template ngbTabContent>
+
+        <div class="card">
+          <div class="card-body">
+
+            <div class="mb-3">
+              <app-graph [dataset]="dataset" [datasetTitle]="dataset.datasetTitle" [index]="i"></app-graph>
+            </div>
+
+            <div class="mb-3">
+              <app-bubble-chart [dataset]="dataset" [datasetTitle]="dataset.datasetTitle" [index]="i"></app-bubble-chart>
+            </div>
+
+            <!--<app-statistics [dataset]="dataset" [datasetTitle]="dataset.datasetTitle" [index]="i"></app-statistics>-->
+          </div>
+        </div>
+
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
+
+</div>
