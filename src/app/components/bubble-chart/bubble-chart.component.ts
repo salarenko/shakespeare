@@ -20,7 +20,7 @@ export class BubbleChartComponent implements OnInit, AfterViewInit {
     this.createChartData(value);
   }
 
-  hide: boolean = false;
+  hide: boolean = true;
   scenesMap: { [key: string]: number };
   speakersMap: { [key: string]: number };
 

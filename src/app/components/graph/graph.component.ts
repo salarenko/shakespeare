@@ -24,7 +24,7 @@ export class GraphComponent implements OnInit, AfterViewInit {
 
   sigma;
   graph;
-  hide: boolean = true;
+  hide: boolean = false;
   graphsCollection: { TITLE: string, GRAPH: IGraph }[] = [];
   datasetsForm: FormGroup;
 

@@ -1,5 +1,5 @@
-<div class="card" (click)="hide = !hide">
-  <div class="card-header d-flex justify-content-between align-items-center">
+<div class="card">
+  <div class="card-header d-flex justify-content-between align-items-center" (click)="hide = !hide">
     Chart
     <a [id]="'downloadChart' + index" [download]="datasetTitle + '-chart.jpg'">
       <button class="btn btn-sm btn-outline-secondary small" (click)="downloadChart()">
