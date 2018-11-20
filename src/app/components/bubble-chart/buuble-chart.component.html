@@ -1,17 +1,13 @@
-<div class="card">
+<div class="card" (click)="hide = !hide">
   <div class="card-header d-flex justify-content-between align-items-center">
     Chart
-    <a [id]="'downloadChart' + index" [download]="datasetTitle + '.jpg'">
-      <button class="btn btn-sm btn-outline-secondary small" (click)="downloadGraph()">
-        <i class="material-icons">
-          get_app
-        </i> Download .jpeg
+    <a [id]="'downloadChart' + index" [download]="datasetTitle + '-chart.jpg'">
+      <button class="btn btn-sm btn-outline-secondary small" (click)="downloadChart()">
+        Download .jpeg
       </button>
     </a>
   </div>
-  <div class="card-body">
-    <div class="vh-75">
-      <canvas [id]="'bubbleChartContainer' + index" width="100%" height="100%"></canvas>
-    </div>
+  <div class="card-body" [hidden]="hide">
+    <canvas [id]="'bubbleChartContainer' + index" width="100%" height="100%"></canvas>
   </div>
 </div>

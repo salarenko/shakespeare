@@ -20,7 +20,7 @@ export class BubbleChartComponent implements OnInit, AfterViewInit {
     this.createChartData(value);
   }
 
-
+  hide: boolean = false;
   scenesMap: { [key: string]: number };
   speakersMap: { [key: string]: number };
 
@@ -152,7 +152,7 @@ export class BubbleChartComponent implements OnInit, AfterViewInit {
     ;
   }
 
-  downloadGraph() {
+  downloadChart() {
     const link = document.getElementById('downloadChart' + this.index) as any;
     link.href = this.graphDOMReference.toDataURL('image/jpg');
     console.log(link);

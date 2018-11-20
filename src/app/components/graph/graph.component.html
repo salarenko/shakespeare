@@ -1,8 +1,14 @@
-<div class="card">
-  <div class="card-header">
+<div class="card" (click)="hide = !hide">
+  <div class="card-header d-flex justify-content-between align-items-center">
     Graph
+    <a [id]="'downloadGraph' + index" [download]="datasetTitle + '-graph.jpg'">
+      <button class="btn btn-sm btn-outline-secondary small" (click)="downloadGraph()">
+        Download .jpeg
+      </button>
+    </a>
   </div>
-  <div class="card-body">
+
+  <div class="card-body" [hidden]="hide">
     <div class="vh-75 d-flex">
       <div class="col-10 p-0" [id]="'sigma-container-' + index"></div>
       <div class="col border-left bg-light">

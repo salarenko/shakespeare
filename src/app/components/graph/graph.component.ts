@@ -24,6 +24,7 @@ export class GraphComponent implements OnInit, AfterViewInit {
 
   sigma;
   graph;
+  hide: boolean = true;
   graphsCollection: { TITLE: string, GRAPH: IGraph }[] = [];
   datasetsForm: FormGroup;
 
@@ -90,6 +91,16 @@ export class GraphComponent implements OnInit, AfterViewInit {
     });
 
     this.sigma.refresh();
+  }
+
+  downloadGraph() {
+    const canvasRef = document
+      .getElementById('sigma-container-' + this.index)
+      .getElementsByClassName('sigma-scene')[0] as any;
+
+    const link = document.getElementById('downloadGraph' + this.index) as any;
+
+    link.href = canvasRef.toDataURL('image/jpg');
   }
 
   initializeSigma() {

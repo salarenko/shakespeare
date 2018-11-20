@@ -5,7 +5,7 @@ import { IDataset } from '../models/dataset.interface';
 
 export const restructurizeData = (data): IDataset => {
 
-  const baseData: { [key: string]: any } = extractBaseData(data, ['TITLE', 'PLAYSUBT']);
+  const baseData: { [key: string]: any } = extractBaseData(data, ['TITLE']);
 
   // console.log(baseData);
   // debugger;
@@ -64,50 +64,6 @@ export const restructurizeData = (data): IDataset => {
       };
     }
   );
-
-  // console.log(structure4);
-  // debugger;
-
-  // CREATE GRAPHS (EDGES AND NODES) ON SCENE LEVEL
-  // const sceneLevelGraphs = structure4.map(
-  //   act => {
-  //     return {
-  //       ...act,
-  //       SCENES: act.SCENES.map(scene => {
-  //
-  //         const uniqueSpeakers: any[] = [...Array.from(new Set(scene.ACTIONS.map(action => action.SPEAKER)))];
-  //
-  //         return {
-  //           ...scene,
-  //           GRAPH: {
-  //             NODES: uniqueSpeakers.map(speaker => {
-  //               return {
-  //                 id: speaker,
-  //                 label: speaker,
-  //                 size: 1,
-  //                 x: Math.cos(randNum() / randNum() * Math.PI * 2) * Math.sqrt(randNum() / 2 + 1) * randNum(),
-  //                 y: Math.sin(randNum() / randNum() * Math.PI * 2) * Math.sqrt(randNum() / 10 + 1) * randNum(),
-  //               };
-  //             }),
-  //             EDGES: connectAllNodes(uniqueSpeakers)
-  //           }
-  //         };
-  //       })
-  //     };
-  //   }
-  // );
-
-  // CREATE GRAPHS (EDGES AND NODES) ON ACT LEVEL
-  // const actLevelGraphs = sceneLevelGraphs.map(act => {
-  //   return {
-  //     TITLE: act.TITLE,
-  //     GRAPH: act.SCENES.reduce((graph, scene) => {
-  //       return graph
-  //         ? sumGraphs([graph, scene.GRAPH])
-  //         : scene.GRAPH;
-  //     }, null)
-  //   };
-  // });
 
   return {
     datasetTitle: baseData.TITLE as string,
