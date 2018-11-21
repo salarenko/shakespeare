@@ -55,7 +55,7 @@ export const restructurizeData = (data): IDataset => {
             ...scene, ACTIONS: scene.ACTIONS.map(action => {
               return {
                 ...action, SPEECH: action.SPEECH.reduce((speech, line) =>
-                  speech + (line[0].text || '')
+                  speech + ' ' + (line[0].text || '')
                   , '')
               };
             })

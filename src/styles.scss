@@ -1,25 +1,125 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~@swimlane/ngx-datatable/release/index.css';
+@import '~@swimlane/ngx-datatable/release/themes/bootstrap.css';
+@import '~@swimlane/ngx-datatable/release/assets/icons.css';
 
 body {
-    margin: 0;
+  margin: 0;
 }
 
 .file-drop {
-    border-radius: .5rem;
-    box-shadow: inset 0px 0px 10px 2px rgba(100,100,100,0.25);
-    .content {
-        color: black !important;
+  border-radius: .5rem;
+  box-shadow: inset 0px 0px 10px 2px rgba(100, 100, 100, 0.25);
+  .content {
+    color: black !important;
 
-    }
+  }
 }
 
 .animate-fade-in-down {
-    animation: fade-in-down .25s ease-in-out;
+  animation: fade-in-down .25s ease-in-out;
 }
 
 @keyframes fade-in-down {
-    0%   {
-        opacity: 0;
-        height: 0px;
+  0% {
+    opacity: 0;
+    height: 0;
+  }
+}
+
+.datatable-body-cell {
+  display: flex !important;
+  align-items: center !important;
+  padding-left: 1rem;
+}
+
+.datatable-body {
+  max-height: 50vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.ngx-datatable.cl2-table {
+  .datatable-body .datatable-body-row {
+    padding: 0;
+    &.datatable-row-even {
+      padding: 0;
     }
+  }
+  &.fullwidth-table {
+    .datatable-body-row {
+      .datatable-row-group {
+        padding: 0.125rem 0;
+      }
+    }
+  }
+  &.card-table {
+    .datatable-header {
+      .datatable-header-cell {
+        display: flex;
+        align-items: center;
+        border-bottom: 0;
+        font-size: 0.625rem;
+        height: auto;
+        line-height: 1.5;
+        padding: 0.125rem 0.4rem;
+        .datatable-header-cell-label {
+          line-height: inherit;
+        }
+        .datatable-header-cell-template-wrap {
+          display: flex;
+          width: 100%;
+          line-height: 1.2rem;
+          .datatable-header-cell-wrapper {
+            .datatable-header-cell-label {
+              display: block;
+            }
+          }
+          .sort-btn {
+            flex-grow: 1;
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+    .datatable-body {
+      datatable-selection {
+        display: flex;
+        .empty-row {
+          padding: .75rem;
+          font-weight: bold;
+        }
+        .datatable-scroll {
+          .datatable-row-wrapper {
+            .datatable-row-group {
+              .datatable-body-row {
+                border: 1px solid red;
+                .datatable-body-cell {
+                  font-size: 0.75rem;
+                  padding: 0.25rem 0.5rem;
+                  display: flex;
+                  align-items: center;
+                  .datatable-body-cell-label {
+                    line-height: inherit;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .datatable-footer {
+      &-inner {
+        margin-top: .75rem;
+        .page-count {
+          display: none;
+        }
+        .datatable-pager {
+          display: flex;
+          justify-content: center;
+        }
+      }
+    }
+  }
 }

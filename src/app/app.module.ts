@@ -14,11 +14,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { StatisticsComponent } from './components/statistics/statistics.component';
 import { BubbleChartComponent } from './components/bubble-chart/bubble-chart.component';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 const routes: Routes = [
   {path: '', component: MainPageComponent},
   {path: 'graph', component: ResultsPageComponent}
-  // { path: 'search', component: SearchComponent }
 ];
 
 @NgModule({
@@ -34,6 +34,7 @@ const routes: Routes = [
     FormsModule,
     BrowserModule,
     HttpClientModule,
+    NgxDatatableModule,
     NgbModule.forRoot(),
     ReactiveFormsModule,
     BrowserAnimationsModule,

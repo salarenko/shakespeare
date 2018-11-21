@@ -1,4 +1,31 @@
 <div class="card">
-  <div class="card-body">
+  <div class="card-header d-flex align-items-center" (click)="hide = !hide">
+    Statistics
+  </div>
+
+  <div class="card-body p-0" [hidden]="hide">
+    <div class="p-4">
+      <div class="mb-3">
+        <ngx-datatable class="bootstrap cl2-table border"
+                       [rows]="actsTableDataset"
+                       [columnMode]="'force'"
+                       [columns]="actsTableColumnsNames">
+        </ngx-datatable>
+      </div>
+      <div class="mb-3">
+        <ngx-datatable class="bootstrap cl2-table border"
+                       [rows]="scenesTableDataset"
+                       [columnMode]="'force'"
+                       [columns]="scenesTableColumnsNames">
+        </ngx-datatable>
+      </div>
+      <div class="mb-3">
+        <ngx-datatable class="bootstrap cl2-table border"
+                       [rows]="actorsTableDataset"
+                       [columnMode]="'force'"
+                       [columns]="actorsTableColumnsNames">
+        </ngx-datatable>
+      </div>
+    </div>
   </div>
 </div>

@@ -2,6 +2,7 @@ import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { IDataset } from '../../models/dataset.interface';
 import { Chart } from 'chart.js';
 import { getRandomColor } from '../../utils/random-color';
+import { uniqueSpeakersInDataset } from '../../utils/unique-speakers-in-dataset';
 
 @Component({
   selector: 'app-bubble-chart',
@@ -47,18 +48,7 @@ export class BubbleChartComponent implements OnInit, AfterViewInit {
   }
 
   createYLabel(dataset) {
-    const uniqueSpeakers = dataset.datasets
-      .map(act => {
-        return act.SCENES.map(scene => {
-          return scene.ACTIONS.map(action => {
-            return action.SPEAKER;
-          });
-        });
-      })
-      .reduce((allActSpeakers, speakerActSet) => [...allActSpeakers, ...speakerActSet], [])
-      .reduce((allSpeakers, speakerSet) => [...allSpeakers, ...speakerSet], [])
-      .filter((v, i, a) => a.indexOf(v) === i);
-
+    const uniqueSpeakers = uniqueSpeakersInDataset(dataset);
     this.yLabel = Object.assign({}, uniqueSpeakers);
     this.speakersMap = this.buildMapFromLabels(this.yLabel);
   }
