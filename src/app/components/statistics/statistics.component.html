@@ -1,6 +1,8 @@
 <div class="card">
-  <div class="card-header d-flex align-items-center" (click)="hide = !hide">
+  <div class="card-header d-flex justify-content-between align-items-center" (click)="hide = !hide">
     Statistics
+    <button class="btn btn-sm btn-outline-secondary" (click)="openEditDatasetModal(modalContent, $event)">Edit Dataset
+    </button>
   </div>
 
   <div class="card-body p-0" [hidden]="hide">
@@ -29,3 +31,45 @@
     </div>
   </div>
 </div>
+
+
+<ng-template #modalContent>
+  <div class="modal-header">
+    <h6 class="modal-title" id="modal-basic-title">{{dataset.datasetTitle}} - Edit dataset</h6>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="datasetForm">
+      <div class="form-group">
+        <label for="actsSelect">Acts</label>
+        <select class="form-control" id="actsSelect" formControlName="act">
+          <option value="" *ngIf="datasetForm.get('act').invalid" seected>Select</option>
+          <option *ngFor="let act of dataset.datasets">
+            {{act.TITLE}}
+          </option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="actsSelect">Scenes</label>
+        <select class="form-control" id="sceneSelect" formControlName="scene">
+          <option value="" *ngIf="datasetForm.get('scene').invalid" seected>Select</option>
+          <option *ngFor="let scene of scenesCollection">
+            {{scene.TITLE}}
+          </option>
+        </select>
+      </div>
+
+      <ul class="list-group small vh-25">
+        <li class="list-group-item py-1 px-2" *ngFor="let action of actionsCollection; let i = index">
+          <div class="d-flex justify-content-between align-items-start">
+            <div>{{action.SPEAKER}} - {{action.SPEECH}}</div>
+            <div class="font-weight-bold h5 m-0 cursor-pointer" (click)="removeAction(i)">&#215;</div>
+          </div>
+        </li>
+      </ul>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-success" (click)="save()">Save</button>
+    <button type="button" class="btn btn-outline-danger" (click)="modal.close()">Cancel</button>
+  </div>
+</ng-template>

@@ -1,19 +1,22 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IDataset } from '../../models/dataset.interface';
 import { uniqueSpeakersInDataset } from '../../utils/unique-speakers-in-dataset';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-statistics',
   templateUrl: './statistics.component.html',
   styleUrls: ['./statistics.component.scss'],
 })
-export class StatisticsComponent {
+export class StatisticsComponent implements OnInit {
 
 
   @Input() index: number;
   @Input() datasetTitle: string;
 
   @Input('dataset') set setGraphs(value: IDataset) {
+    this.dataset = value;
     this.createActorsDataset(value);
     this.createScenesDataset(value);
     this.createActsDataset(value);
@@ -22,6 +25,8 @@ export class StatisticsComponent {
     this.initializeSceneTableColumns();
     this.initializeActorsTableColumns();
   }
+
+  @Output() editDataset = new EventEmitter();
 
   actsTableColumnsNames: any[];
   actorsTableColumnsNames: any[];
@@ -51,8 +56,20 @@ export class StatisticsComponent {
   }[] = [];
 
   hide = true;
+  modal;
+  dataset: IDataset;
+  datasetForm: FormGroup;
 
-  constructor() {
+  scenesCollection: any[] = [];
+  actionsCollection: any[] = [];
+
+  constructor(private fb: FormBuilder, private modalService: NgbModal) {
+  }
+
+  ngOnInit() {
+    this.buildForm();
+    this.observeActChange();
+    this.observeSceneChange();
   }
 
   initializeActorsTableColumns() {
@@ -137,7 +154,6 @@ export class StatisticsComponent {
 
   }
 
-
   createScenesDataset(dataset: IDataset) {
     let totalNumberOfWords = 0;
 
@@ -194,5 +210,55 @@ export class StatisticsComponent {
         actName: act.TITLE,
         numOfScenes: act.SCENES.length
       }));
+  }
+
+  buildForm() {
+    this.datasetForm = this.fb.group({
+      act: ['', Validators.required],
+      scene: ['', Validators.required],
+      action: ['', Validators.required],
+    });
+  }
+
+  openEditDatasetModal(modalContent, event) {
+    event.stopPropagation();
+    this.modal = this.modalService.open(modalContent, {size: 'lg'});
+  }
+
+  observeActChange() {
+    this.datasetForm.get('act').valueChanges.subscribe(
+      value => {
+        this.datasetForm.get('scene').setValue('');
+        this.scenesCollection = value
+          ? this.dataset.datasets
+            .find(act => act.TITLE === value)
+            .SCENES
+          : [];
+      }
+    );
+  }
+
+  observeSceneChange() {
+    this.datasetForm.get('scene').valueChanges.subscribe(
+      value => {
+        this.datasetForm.get('action').setValue('');
+        this.actionsCollection = value
+          ? this.scenesCollection
+            .find(scene => {
+              return scene.TITLE.replace(/([\s])+/g, '') === value.replace(/([\s])+/g, '');
+            })
+            .ACTIONS
+          : [];
+      }
+    );
+  }
+
+  removeAction(index) {
+    this.actionsCollection.splice(index, 1);
+  }
+
+  save() {
+    this.modal.close();
+    this.dataset = JSON.parse(JSON.stringify(this.dataset));
   }
 }

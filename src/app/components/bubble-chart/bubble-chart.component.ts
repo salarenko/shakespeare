@@ -142,7 +142,8 @@ export class BubbleChartComponent implements OnInit, AfterViewInit {
     ;
   }
 
-  downloadChart() {
+  downloadChart(event) {
+    event.stopPropagation();
     const link = document.getElementById('downloadChart' + this.index) as any;
     link.href = this.graphDOMReference.toDataURL('image/jpg');
     console.log(link);

@@ -2,6 +2,11 @@
   min-height: 75vh;
 }
 
+.vh-25 {
+  max-height: 25vh;
+  overflow-y: scroll;
+}
+
 .card {
   .card-header {
     height: 40px;
@@ -10,4 +15,8 @@
   .card-body {
     padding: 0;
   }
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }

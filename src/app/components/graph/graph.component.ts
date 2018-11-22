@@ -93,7 +93,8 @@ export class GraphComponent implements OnInit, AfterViewInit {
     this.sigma.refresh();
   }
 
-  downloadGraph() {
+  downloadGraph(event) {
+    event.stopPropagation();
     const canvasRef = document
       .getElementById('sigma-container-' + this.index)
       .getElementsByClassName('sigma-scene')[0] as any;
