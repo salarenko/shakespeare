@@ -11,7 +11,8 @@ export const connectAllNodes = (nodes: string[]): IEdge[] => {
         edges.push({
           id: node1 + node2,
           source: node1,
-          target: node2
+          target: node2,
+          label: ':)'
         });
       }
 

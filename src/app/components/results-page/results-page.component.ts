@@ -18,4 +18,8 @@ export class ResultsPageComponent implements OnInit {
   ngOnInit() {
     this.datasetsCollection = this.graphService.datasets;
   }
+
+  updateDataset(i, dataset: IDataset) {
+    this.datasetsCollection[i] = dataset;
+  }
 }

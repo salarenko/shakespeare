@@ -26,7 +26,7 @@ export class StatisticsComponent implements OnInit {
     this.initializeActorsTableColumns();
   }
 
-  @Output() editDataset = new EventEmitter();
+  @Output() updateDataset = new EventEmitter();
 
   actsTableColumnsNames: any[];
   actorsTableColumnsNames: any[];
@@ -58,6 +58,7 @@ export class StatisticsComponent implements OnInit {
   hide = true;
   modal;
   dataset: IDataset;
+  actionForm: FormGroup;
   datasetForm: FormGroup;
 
   scenesCollection: any[] = [];
@@ -216,7 +217,11 @@ export class StatisticsComponent implements OnInit {
     this.datasetForm = this.fb.group({
       act: ['', Validators.required],
       scene: ['', Validators.required],
-      action: ['', Validators.required],
+    });
+
+    this.actionForm = this.fb.group({
+      speaker: ['', Validators.required],
+      speech: ['', Validators.required],
     });
   }
 
@@ -241,7 +246,6 @@ export class StatisticsComponent implements OnInit {
   observeSceneChange() {
     this.datasetForm.get('scene').valueChanges.subscribe(
       value => {
-        this.datasetForm.get('action').setValue('');
         this.actionsCollection = value
           ? this.scenesCollection
             .find(scene => {
@@ -257,8 +261,18 @@ export class StatisticsComponent implements OnInit {
     this.actionsCollection.splice(index, 1);
   }
 
+  addAction() {
+    if (this.actionForm.valid && this.datasetForm.valid) {
+      this.actionsCollection.push({
+        SPEAKER: this.actionForm.get('speaker').value,
+        SPEECH: this.actionForm.get('speech').value
+      });
+      this.actionForm.reset();
+    }
+  }
+
   save() {
     this.modal.close();
-    this.dataset = JSON.parse(JSON.stringify(this.dataset));
+    this.updateDataset.emit(JSON.parse(JSON.stringify(this.dataset)));
   }
 }

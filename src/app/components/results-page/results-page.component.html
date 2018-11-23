@@ -17,7 +17,8 @@
             </div>
 
             <div class="mb-3">
-              <app-statistics [dataset]="dataset" [datasetTitle]="dataset.datasetTitle" [index]="i"></app-statistics>
+              <app-statistics [dataset]="dataset" [datasetTitle]="dataset.datasetTitle"
+                              [index]="i" (updateDataset)="updateDataset(i, $event)"></app-statistics>
             </div>
 
           </div>
