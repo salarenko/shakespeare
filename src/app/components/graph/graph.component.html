@@ -31,10 +31,22 @@
                 {{dataset.TITLE}}
               </label>
             </div>
-
           </form>
         </div>
 
+        <div class="card mt-3 px-1 small" *ngIf="selectedNodeInfo?.selNode">
+          <p class="m-0">Node name: {{selectedNodeInfo.selNode.label}}</p>
+          <p class="m-0">Node size: {{selectedNodeInfo.selNode.size}}</p>
+          <p class="m-0">Neighbours: {{selectedNodeInfo.neighbours.length}}</p>
+          <div class="border-top">
+            <p class="m-0">Connections:</p>
+            <div class="neighbours-container">
+              <p class="m-0 d-flex justify-content-between" *ngFor="let neighbour of selectedNodeInfo.neighbours">
+                <span>{{neighbour.name}}</span>
+                <span>Weight: {{neighbour.weight}}</span></p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 

@@ -1,5 +1,5 @@
-import {IGraph} from '../models/graph.interface';
-import {uniqueEdge} from './unique-edge';
+import { IGraph } from '../models/graph.interface';
+import { uniqueEdge } from './unique-edge';
 
 export const sumGraphs = (graphs: IGraph[]): IGraph => {
   const usedNodes: string[] = [];
@@ -14,19 +14,22 @@ export const sumGraphs = (graphs: IGraph[]): IGraph => {
     graph.NODES.forEach(node => {
 
       if (!usedNodes.includes(node.id)) {
-        newGraph.NODES.push(node);
+        newGraph.NODES.push({...node});
         usedNodes.push(node.id);
       } else {
         const existingNode = newGraph.NODES.find(el => el.id === node.id);
-        existingNode.size++;
+        existingNode.size += node.size;
       }
 
     });
 
     graph.EDGES.forEach(edge => {
+      const existingEdge = uniqueEdge(newGraph.EDGES, edge.target, edge.source);
 
-      if (uniqueEdge(newGraph.EDGES, edge.target, edge.source)) {
+      if (!existingEdge) {
         newGraph.EDGES.push({...edge});
+      } else {
+        existingEdge.weight += edge.weight;
       }
     });
 

@@ -1,1 +1,1 @@
-export const randNum = () => (Math.random() * 10000) + 1;
+export const randNum = () => (Math.random() * 10) + 1;
